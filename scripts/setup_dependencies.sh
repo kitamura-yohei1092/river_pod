@@ -7,7 +7,7 @@ dart pub get
 
 cd ../flutter_riverpod
 
-echo "overriding flutter_riverpod dependencies"
+echo " overriding flutter_riverpod dependencies"
 echo "
 dependency_overrides:
   riverpod:
