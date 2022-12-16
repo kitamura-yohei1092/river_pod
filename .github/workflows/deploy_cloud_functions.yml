@@ -1,0 +1,53 @@
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  job_id:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+    # steps:
+    #   - name: "Checkout"
+    #     uses: actions/checkout@v3
+    #     with:
+    #       fetch-depth: 2
+    #   - run: git checkout feature/analyze-auto-start
+
+    #   - id: "auth"
+    #     uses: "google-github-actions/auth@v1"
+    #     with:
+    #       credentials_json: ${{secrets.GOOGLE_CREDENTIAL_KEY}}
+
+    #   - name: "Set up Cloud SDK"
+    #     uses: "google-github-actions/setup-gcloud@v1"
+
+    #   - name: "Set up Node"
+    #     uses: actions/setup-node@v3
+    #     with:
+    #       node-version: 16
+
+    #   - name: "Install TSC"
+    #     run: "npm install typescript"
+
+    #   - name: "TS to JS"
+    #     working-directory: ./functions
+    #     # 失敗しても継続する
+    #     run: "npm run build || true"
+
+    #   - name: "Use gcloud CLI"
+    #     working-directory: functions
+    #     run: |
+    #       gcloud functions deploy analyzeExam \
+    #       --region us-central1 \
+    #       --runtime nodejs16 \
+    #       --entry-point analyzeExam \
+    #       --trigger-event "providers/cloud.firestore/eventTypes/document.update" \
+    #       --trigger-resource "projects/sci-app-348913/databases/(default)/documents/users/{userId}/exams/{examId}" \
+    #       --set-env-vars "GCLOUD_PROJECT"="sci-app-348912",ZONE="northamerica-northeast1-a",MACHINE_TYPE="e2-standard-8",SERVICE_ACCOUNT="870485600975-compute@developer.gserviceaccount.com",IMAGE_NAME="us-central1-docker.pkg.dev/sci-app-348913/score-audio-analyzer/score-audio-analyzer-sample",STARTUP_SCRIPT_URL="https://storage.cloud.google.com/kaeka-startup-script/startupScript.sh",SOURCE_MACHINE_IMAGE="projects/sci-app-348913/global/machineImages/cos-stable-101-17162-40-34-copy"
